@@ -18,7 +18,10 @@ class _ProductSettingState extends State<ProductSetting> {
         child: Scaffold(
             appBar: AppBar(
               bottom: const TabBar(textScaler: TextScaler.linear(1.5), tabs: [
-                Text('create product'),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text('create product'),
+                ),
                 Text('manage product'),
               ]),
               actions: const [
@@ -51,16 +54,9 @@ class _ProductSettingState extends State<ProductSetting> {
 
 Future<void> getLostData() async {
   final ImagePicker picker = ImagePicker();
-  final LostDataResponse response = await picker.retrieveLostData();
-  if (response.isEmpty) {
+  final XFile? response = await picker.pickImage(source: ImageSource.gallery);
+  if (response != null) {
     return;
-  }
-  final List<XFile>? files = response.files;
-  if (files != null) {
-    // _handleLostFiles(files);
-    // print(files);
-  } else {
-    // print(response.exception);
   }
 }
 

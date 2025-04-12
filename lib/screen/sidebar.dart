@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopcard/config/redux/action.dart';
 import 'package:shopcard/config/redux/redux.dart';
 import 'package:shopcard/screen/account.dart';
@@ -20,6 +23,25 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
   bool isHelpCollaped = false;
+  String? profilePathImage;
+  String? username;
+  int? age;
+
+  Future<void> _loadPreferences() async {
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      username = pref.getString('username');
+      age = pref.getInt('age');
+      profilePathImage = pref.getString('profilePathImage');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,12 +70,19 @@ class _SideBarState extends State<SideBar> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(
                             20), // Adjust for desired roundness
-                        child: Image.asset(
-                          'assets/img/profile.jpeg',
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        ),
+                        child: profilePathImage != null
+                            ? Image.file(
+                                File(profilePathImage!),
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                'assets/img/profile.jpeg',
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       Positioned(
                         bottom: 0,
@@ -84,7 +113,7 @@ class _SideBarState extends State<SideBar> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Lina',
+                          username ?? 'Lina',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -93,7 +122,7 @@ class _SideBarState extends State<SideBar> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '18 years',
+                          age != null ? age.toString() : 'Not set yet',
                           style: TextStyle(
                             fontSize: 15,
                             color: Theme.of(context).colorScheme.onSurface,
@@ -243,7 +272,6 @@ class _SideBarState extends State<SideBar> {
                     onTap: () {
                       StoreProvider.of<AppState>(context)
                           .dispatch(LogoutAction());
-                          
                     },
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
