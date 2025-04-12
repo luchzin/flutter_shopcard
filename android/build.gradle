@@ -4,6 +4,16 @@ allprojects {
         mavenCentral()
     }
 }
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0' // Update to 8.1.0 or higher
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0" // If using Kotlin
+    }
+}
 
 rootProject.buildDir = '../build'
 subprojects {

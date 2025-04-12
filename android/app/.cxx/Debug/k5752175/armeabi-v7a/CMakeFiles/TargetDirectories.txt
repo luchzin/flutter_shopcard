@@ -1,0 +1,2 @@
+/Users/hi/coding/flutter/shopcard/android/app/.cxx/Debug/k5752175/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/hi/coding/flutter/shopcard/android/app/.cxx/Debug/k5752175/armeabi-v7a/CMakeFiles/rebuild_cache.dir

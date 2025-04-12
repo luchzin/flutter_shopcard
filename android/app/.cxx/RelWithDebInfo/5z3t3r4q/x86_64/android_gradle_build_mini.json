@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/hi/sdk/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/hi/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/hi/coding/flutter/shopcard/android/app/.cxx/RelWithDebInfo/5z3t3r4q/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/hi/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/hi/coding/flutter/shopcard/android/app/.cxx/RelWithDebInfo/5z3t3r4q/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
